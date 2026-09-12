@@ -31,11 +31,22 @@
   --paper:#F5F7F5;
   --panel:#FFFFFF;
   --ink:#14201D;
-  --ink-soft:#4B5A55;
+  --ink-soft:#3B4A46;
   --rule:#D8E0DB;
   --deep:#0E5F5C;
   --deep-wash:#E4EFED;
   --silt:#8A6A3B;
+
+  /* one colour per tab — change any of these freely */
+  --c-home:#0E5F5C;
+  --c-research:#1F5C8B;
+  --c-academic:#6A4C93;
+  --c-pubs:#8C4A2F;
+  --c-software:#245C36;
+  --c-ipr:#7A2230;
+  --c-exp:#2D3E82;
+  --c-teaching:#8A6008;
+  --c-contact:#3C5A57;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -47,41 +58,81 @@ body{
   font-size:16.5px;
   line-height:1.65;
 }
+/* layered background: soft colour wash + biology / AI motif */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(760px 620px at 6% -6%,   rgba(14,124,116,.20), transparent 62%),
+    radial-gradient(700px 600px at 100% 4%,  rgba(45,62,130,.18),  transparent 60%),
+    radial-gradient(720px 640px at 88% 96%,  rgba(106,76,147,.17), transparent 62%),
+    radial-gradient(680px 560px at 4% 100%,  rgba(176,130,7,.15),  transparent 60%),
+    radial-gradient(620px 520px at 50% 52%,  rgba(46,125,70,.10),  transparent 66%);
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:.17;
+  background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='460' height='460' viewBox='0 0 460 460'><g font-family='monospace' font-size='19' font-weight='700'><text x='14' y='34' fill='%232E7D46'>A</text><text x='33' y='34' fill='%232D7FB8'>C</text><text x='52' y='34' fill='%23B08207'>G</text><text x='71' y='34' fill='%23C2410C'>T</text><text x='90' y='34' fill='%23C2410C'>T</text><text x='109' y='34' fill='%23B08207'>G</text><text x='128' y='34' fill='%232D7FB8'>C</text><text x='147' y='34' fill='%232E7D46'>A</text><text x='14' y='58' fill='%232E7D46'>A</text><text x='33' y='58' fill='%232D7FB8'>C</text><text x='52' y='58' fill='%23B08207'>G</text><text x='71' y='58' fill='%232E7D46'>A</text><text x='90' y='58' fill='%23C2410C'>T</text><text x='109' y='58' fill='%23B08207'>G</text><text x='128' y='58' fill='%232D7FB8'>C</text><text x='147' y='58' fill='%232E7D46'>A</text><text x='14' y='82' fill='%232E7D46'>A</text><text x='33' y='82' fill='%232D7FB8'>C</text><text x='52' y='82' fill='%238A9A95'>-</text><text x='71' y='82' fill='%23C2410C'>T</text><text x='90' y='82' fill='%23C2410C'>T</text><text x='109' y='82' fill='%23B08207'>G</text><text x='128' y='82' fill='%232D7FB8'>C</text><text x='147' y='82' fill='%232E7D46'>A</text><text x='14' y='106' fill='%232E7D46'>A</text><text x='33' y='106' fill='%232D7FB8'>C</text><text x='52' y='106' fill='%23B08207'>G</text><text x='71' y='106' fill='%23C2410C'>T</text><text x='90' y='106' fill='%23C2410C'>T</text><text x='109' y='106' fill='%23B08207'>G</text><text x='128' y='106' fill='%23C2410C'>T</text><text x='147' y='106' fill='%232E7D46'>A</text></g><g fill='%230E7C74'><rect x='16' y='116' width='13' height='16'/><rect x='35' y='116' width='13' height='16'/><rect x='54' y='122' width='13' height='10'/><rect x='73' y='120' width='13' height='12'/><rect x='92' y='116' width='13' height='16'/><rect x='111' y='116' width='13' height='16'/><rect x='130' y='124' width='13' height='8'/><rect x='149' y='116' width='13' height='16'/></g><g fill='none' stroke='%236A4C93' stroke-width='3' stroke-linecap='round'><path d='M262 26h34v34h-34M262 60h34'/><path d='M296 43h26v46h-26'/><path d='M262 96h60v34h-34'/><path d='M322 66v46'/><path d='M322 89h30'/><path d='M352 89v-46'/><path d='M352 43h-30'/><path d='M352 89h34'/></g><g fill='%236A4C93'><circle cx='262' cy='26' r='5'/><circle cx='262' cy='60' r='5'/><circle cx='262' cy='96' r='5'/><circle cx='262' cy='130' r='5'/></g><g fill='none' stroke-width='3'><path d='M18 214c10 0 12-46 22-46s12 46 22 46' stroke='%232E7D46'/><path d='M62 214c10 0 12-38 22-38s12 38 22 38' stroke='%232D7FB8'/><path d='M106 214c10 0 12-50 22-50s12 50 22 50' stroke='%23B08207'/><path d='M150 214c10 0 12-34 22-34s12 34 22 34' stroke='%23C2410C'/><path d='M194 214c10 0 12-44 22-44s12 44 22 44' stroke='%232D7FB8'/><path d='M14 214h230' stroke='%238A9A95' stroke-width='2'/></g><g><rect x='16' y='262' width='96' height='9' rx='4' fill='%230E7C74'/><rect x='52' y='278' width='104' height='9' rx='4' fill='%232D3E82'/><rect x='30' y='294' width='88' height='9' rx='4' fill='%232E7D46'/><rect x='86' y='310' width='110' height='9' rx='4' fill='%23B08207'/><rect x='120' y='326' width='92' height='9' rx='4' fill='%232D7FB8'/><rect x='16' y='348' width='210' height='4' rx='2' fill='%238A9A95'/></g><g><rect x='268' y='186' width='34' height='34' fill='%23C2410C'/><rect x='306' y='186' width='34' height='34' fill='%23B08207'/><rect x='344' y='186' width='34' height='34' fill='%232D3E82'/><rect x='382' y='186' width='34' height='34' fill='%232D7FB8'/><rect x='268' y='224' width='34' height='34' fill='%232D3E82'/><rect x='306' y='224' width='34' height='34' fill='%23C2410C'/><rect x='344' y='224' width='34' height='34' fill='%232D7FB8'/><rect x='382' y='224' width='34' height='34' fill='%23B08207'/><rect x='268' y='262' width='34' height='34' fill='%232D7FB8'/><rect x='306' y='262' width='34' height='34' fill='%232E7D46'/><rect x='344' y='262' width='34' height='34' fill='%23B08207'/><rect x='382' y='262' width='34' height='34' fill='%232D3E82'/><rect x='268' y='300' width='34' height='34' fill='%23B08207'/><rect x='306' y='300' width='34' height='34' fill='%232D3E82'/><rect x='344' y='300' width='34' height='34' fill='%23C2410C'/><rect x='382' y='300' width='34' height='34' fill='%232E7D46'/></g><g fill='none' stroke='%230E7C74' stroke-width='4' stroke-linecap='round'><path d='M20 412c22-34 44 34 66 0s44 34 66 0 44 34 66 0'/></g><g fill='none' stroke='%236A4C93' stroke-width='3'><path d='M286 400h34l14 24h34l14-24h34'/></g><g fill='%236A4C93'><circle cx='286' cy='400' r='5'/><circle cx='334' cy='424' r='5'/><circle cx='382' cy='400' r='5'/><circle cx='416' cy='400' r='5'/></g></svg>");
+  background-size:460px 460px;
+}
+/* keep long text sitting on a calm surface so the motif never fights it */
+main{
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(2px);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:10px;
+  box-shadow:0 6px 34px rgba(20,32,29,.07);
+}
 .wrap{max-width:860px;margin:0 auto;padding:0 24px}
 
 /* ---------- masthead ---------- */
-header.masthead{padding:64px 0 28px}
+header.masthead{padding:34px 0 10px}
+.mast-inner{
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(3px);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:10px;
+  box-shadow:0 6px 34px rgba(20,32,29,.09);
+  padding:34px 34px 28px;
+  max-width:908px;
+}
 .mast-inner{display:flex;gap:36px;align-items:flex-start}
 .mast-text{flex:1 1 auto;min-width:0}
 .portrait{
   flex:0 0 auto;
-  width:168px;height:206px;
-  object-fit:cover;object-position:center 22%;
-  border:1px solid var(--rule);
+  width:200px;height:252px;
+  object-fit:cover;object-position:50% 12%;
+  border-radius:4px;
+  border:5px solid var(--panel);
+  box-shadow:0 0 0 1px var(--rule), 0 10px 26px rgba(20,32,29,.13);
   background:var(--panel);
 }
 h1{
   font-family:Newsreader,Georgia,serif;
-  font-weight:500;
+  font-weight:600;
   font-size:clamp(2.6rem,7vw,4rem);
   line-height:1.02;
   letter-spacing:-.02em;
   margin:0 0 14px;
+  color:var(--deep);
 }
 .standfirst{
   font-family:Newsreader,Georgia,serif;
   font-size:clamp(1.05rem,2.4vw,1.3rem);
   line-height:1.5;
-  color:var(--ink-soft);
+  font-weight:500;
+  color:var(--ink);
   max-width:46ch;
   margin:0 0 22px;
 }
-.affil{font-size:.92rem;color:var(--ink-soft);margin:0 0 20px}
+.affil{font-size:.95rem;font-weight:500;color:var(--ink);margin:0 0 20px}
 .affil strong{color:var(--ink);font-weight:600}
 
 .elsewhere{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .elsewhere a{
-  font-size:.85rem;
+  font-size:.86rem;
+  font-weight:600;
   text-decoration:none;
   color:var(--deep);
   border:1px solid var(--rule);
@@ -94,7 +145,8 @@ h1{
 /* ---------- tabs ---------- */
 nav.tabs{
   position:sticky;top:0;z-index:20;
-  background:var(--paper);
+  background:rgba(245,247,245,.94);
+  backdrop-filter:blur(6px);
   border-bottom:1px solid var(--rule);
 }
 .tabstrip{
@@ -106,27 +158,36 @@ nav.tabs{
 .tabstrip button{
   flex:0 0 auto;
   font-family:Inter,sans-serif;
-  font-size:.9rem;font-weight:500;
-  color:var(--ink-soft);
+  font-size:.94rem;font-weight:600;
+  color:var(--ink);
   background:none;border:none;
-  border-bottom:2px solid transparent;
+  border-bottom:3px solid transparent;
   padding:14px 13px;cursor:pointer;white-space:nowrap;
 }
-.tabstrip button:hover{color:var(--ink)}
-.tabstrip button[aria-selected="true"]{color:var(--deep);border-bottom-color:var(--deep)}
+.tabstrip button:hover{color:var(--ink);background:rgba(255,255,255,.6)}
+.tabstrip button[aria-selected="true"]{
+  color:var(--tab,var(--deep));
+  border-bottom-color:var(--tab,var(--deep));
+  background:var(--panel);
+  font-weight:700;
+}
 .tabstrip button:focus-visible{outline:2px solid var(--deep);outline-offset:-4px}
 
 /* ---------- panels ---------- */
-main{padding:40px 0 90px}
+main{padding:38px 34px 70px;margin:34px auto 90px}
 [role="tabpanel"][hidden]{display:none}
 h2{
   font-family:Newsreader,Georgia,serif;
-  font-weight:500;font-size:1.75rem;letter-spacing:-.01em;
+  font-weight:600;font-size:1.85rem;letter-spacing:-.01em;
   margin:0 0 6px;
+  color:var(--deep);
+  padding-bottom:8px;
+  border-bottom:2px solid var(--deep-wash);
 }
 h3{font-size:1.02rem;font-weight:600;margin:0 0 3px}
-.lede{color:var(--ink-soft);max-width:62ch;margin:0 0 30px}
-p{max-width:68ch}
+.lede{color:var(--ink-soft);font-weight:500;max-width:62ch;margin:14px 0 30px}
+p{max-width:70ch;text-align:justify;text-justify:inter-word;hyphens:auto}
+.lede,.meta,.kind,.affil,.standfirst{text-align:left;hyphens:none}
 
 .entry{padding:22px 0;border-top:1px solid var(--rule)}
 .entry:first-of-type{border-top:none;padding-top:4px}
@@ -135,14 +196,25 @@ p{max-width:68ch}
 .note{font-size:.9rem;color:var(--ink-soft)}
 
 /* record table */
-table{width:100%;border-collapse:collapse;margin:0 0 8px;font-size:.93rem}
-th{
-  text-align:left;font-weight:600;font-size:.83rem;
-  color:var(--ink-soft);padding:0 12px 8px 0;
-  border-bottom:1px solid var(--rule);
+table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  margin:0 0 8px;font-size:.93rem;
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-radius:6px;overflow:hidden;
+  box-shadow:0 2px 10px rgba(20,32,29,.05);
 }
-td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
-td:last-child,th:last-child{padding-right:0;white-space:nowrap}
+th{
+  text-align:left;font-weight:600;font-size:.8rem;
+  letter-spacing:.02em;
+  color:var(--panel);background:var(--deep);
+  padding:12px 16px;
+  border:none;
+}
+td{padding:15px 16px;border-top:1px solid var(--rule);vertical-align:top;text-align:left}
+tbody tr:first-child td{border-top:none}
+tbody tr:nth-child(even){background:var(--deep-wash)}
+td:last-child,th:last-child{white-space:nowrap}
 
 /* software */
 .tool{padding:20px 0;border-top:1px solid var(--rule)}
@@ -173,7 +245,8 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;col
   header.masthead{padding:36px 0 22px}
   body{font-size:16px}
   .mast-inner{flex-direction:column-reverse;gap:22px}
-  .portrait{width:132px;height:160px}
+  .portrait{width:156px;height:196px}
+  main{padding:26px 18px 56px;margin:22px auto 60px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -191,7 +264,7 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;col
       <a href="https://www.linkedin.com/in/jutan-das-a69474163">LinkedIn</a>
       <a href="https://vidwan.inflibnet.ac.in/profile/715814">Vidwan</a>
       <a href="https://orcid.org/XXXX-XXXX-XXXX-XXXX" class="todo">ORCID</a>
-      <a href="files/Jutan_Das_CV.pdf">CV (PDF)</a>
+      <a href="Dr_Jutan_Das_Updated_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
     </div>
     </div>
     <img class="portrait" src="https://jutan-iari.github.io/DrjutanDasinfo/jutan-das.jpg?v=2" alt="Jutan Das">
@@ -200,15 +273,15 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;col
 
 <nav class="tabs">
   <div class="tabstrip" role="tablist" aria-label="Sections">
-    <button role="tab" id="t-home" aria-controls="p-home" aria-selected="true">Home</button>
-    <button role="tab" id="t-research" aria-controls="p-research" aria-selected="false" tabindex="-1">Research</button>
-    <button role="tab" id="t-academic" aria-controls="p-academic" aria-selected="false" tabindex="-1">Academic</button>
-    <button role="tab" id="t-pubs" aria-controls="p-pubs" aria-selected="false" tabindex="-1">Publications</button>
-    <button role="tab" id="t-software" aria-controls="p-software" aria-selected="false" tabindex="-1">Software</button>
-    <button role="tab" id="t-ipr" aria-controls="p-ipr" aria-selected="false" tabindex="-1">Copyright &amp; IPR</button>
-    <button role="tab" id="t-exp" aria-controls="p-exp" aria-selected="false" tabindex="-1">Experience</button>
-    <button role="tab" id="t-teaching" aria-controls="p-teaching" aria-selected="false" tabindex="-1">Teaching</button>
-    <button role="tab" id="t-contact" aria-controls="p-contact" aria-selected="false" tabindex="-1">Contact</button>
+    <button role="tab" id="t-home" style="--tab:var(--c-home)" aria-controls="p-home" aria-selected="true">Home</button>
+    <button role="tab" id="t-research" style="--tab:var(--c-research)" aria-controls="p-research" aria-selected="false" tabindex="-1">Research</button>
+    <button role="tab" id="t-academic" style="--tab:var(--c-academic)" aria-controls="p-academic" aria-selected="false" tabindex="-1">Academic</button>
+    <button role="tab" id="t-pubs" style="--tab:var(--c-pubs)" aria-controls="p-pubs" aria-selected="false" tabindex="-1">Publications</button>
+    <button role="tab" id="t-software" style="--tab:var(--c-software)" aria-controls="p-software" aria-selected="false" tabindex="-1">Software</button>
+    <button role="tab" id="t-ipr" style="--tab:var(--c-ipr)" aria-controls="p-ipr" aria-selected="false" tabindex="-1">Copyright &amp; IPR</button>
+    <button role="tab" id="t-exp" style="--tab:var(--c-exp)" aria-controls="p-exp" aria-selected="false" tabindex="-1">Experience</button>
+    <button role="tab" id="t-teaching" style="--tab:var(--c-teaching)" aria-controls="p-teaching" aria-selected="false" tabindex="-1">Teaching</button>
+    <button role="tab" id="t-contact" style="--tab:var(--c-contact)" aria-controls="p-contact" aria-selected="false" tabindex="-1">Contact</button>
   </div>
 </nav>
 
@@ -487,7 +560,7 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;col
       <a href="https://scholar.google.com/citations?user=M98WWB4AAAAJ">Google Scholar</a> ·
       <a href="https://www.linkedin.com/in/jutan-das-a69474163">LinkedIn</a> ·
       <a href="https://vidwan.inflibnet.ac.in/profile/715814">Vidwan (ID 715814)</a> ·
-      <a href="files/Jutan_Das_CV.pdf">Curriculum vitae</a>
+      <a href="Dr_Jutan_Das_Updated_CV.pdf" target="_blank" rel="noopener">Curriculum vitae</a>
     </p>
   </div>
 </section>
@@ -509,6 +582,12 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;col
       t.tabIndex = selected ? 0 : -1;
       document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
     });
+    var c = getComputedStyle(tab).getPropertyValue('--tab');
+    if(c){
+      c = c.trim();
+      document.documentElement.style.setProperty('--deep', c);
+      document.documentElement.style.setProperty('--deep-wash', c + '14');
+    }
     if(focus) tab.focus();
     history.replaceState(null, '', '#' + tab.id.replace('t-',''));
     window.scrollTo({top:0});
