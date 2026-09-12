@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Jutan Das — Computational Biology &amp; Bioinformatics</title>
+<meta name="description" content="Dr. Jutan Das, Assistant Professor of Bioinformatics at Kalinga University. Machine learning for non-coding RNA discovery, CRISPR-Cas9 off-target prediction, and agricultural genomics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   COLOUR SCHEME
+   --deep      = tab colour, active tab underline, all links
+   --deep-wash = pale version, used behind the IPR box
+   --paper     = page background
+   --ink       = main text
+   Change these five and the whole site changes.
+
+   Ready-made alternatives — copy the two lines into --deep
+   and --deep-wash below to switch:
+
+   Teal (current)     --deep:#0E5F5C;  --deep-wash:#E4EFED;
+   Indigo             --deep:#2D3E82;  --deep-wash:#E7EAF6;
+   Oxford blue        --deep:#12395E;  --deep-wash:#E3ECF4;
+   Maroon             --deep:#7A2230;  --deep-wash:#F5E6E8;
+   Forest green       --deep:#245C36;  --deep-wash:#E5F0E7;
+   Charcoal (neutral) --deep:#333333;  --deep-wash:#ECECEC;
+   ========================================================= */
+:root{
+  --paper:#F5F7F5;
+  --panel:#FFFFFF;
+  --ink:#14201D;
+  --ink-soft:#4B5A55;
+  --rule:#D8E0DB;
+  --deep:#0E5F5C;
+  --deep-wash:#E4EFED;
+  --silt:#8A6A3B;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Inter,system-ui,sans-serif;
+  font-size:16.5px;
+  line-height:1.65;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* ---------- masthead ---------- */
+header.masthead{padding:64px 0 28px}
+.mast-inner{display:flex;gap:36px;align-items:flex-start}
+.mast-text{flex:1 1 auto;min-width:0}
+.portrait{
+  flex:0 0 auto;
+  width:168px;height:206px;
+  object-fit:cover;object-position:center 22%;
+  border:1px solid var(--rule);
+  background:var(--panel);
+}
+h1{
+  font-family:Newsreader,Georgia,serif;
+  font-weight:500;
+  font-size:clamp(2.6rem,7vw,4rem);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  margin:0 0 14px;
+}
+.standfirst{
+  font-family:Newsreader,Georgia,serif;
+  font-size:clamp(1.05rem,2.4vw,1.3rem);
+  line-height:1.5;
+  color:var(--ink-soft);
+  max-width:46ch;
+  margin:0 0 22px;
+}
+.affil{font-size:.92rem;color:var(--ink-soft);margin:0 0 20px}
+.affil strong{color:var(--ink);font-weight:600}
+
+.elsewhere{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.elsewhere a{
+  font-size:.85rem;
+  text-decoration:none;
+  color:var(--deep);
+  border:1px solid var(--rule);
+  background:var(--panel);
+  border-radius:2px;
+  padding:5px 11px;
+}
+.elsewhere a:hover{border-color:var(--deep);background:var(--deep-wash)}
+
+/* ---------- tabs ---------- */
+nav.tabs{
+  position:sticky;top:0;z-index:20;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+.tabstrip{
+  max-width:860px;margin:0 auto;padding:0 24px;
+  display:flex;gap:2px;overflow-x:auto;
+  scrollbar-width:none;
+}
+.tabstrip::-webkit-scrollbar{display:none}
+.tabstrip button{
+  flex:0 0 auto;
+  font-family:Inter,sans-serif;
+  font-size:.9rem;font-weight:500;
+  color:var(--ink-soft);
+  background:none;border:none;
+  border-bottom:2px solid transparent;
+  padding:14px 13px;cursor:pointer;white-space:nowrap;
+}
+.tabstrip button:hover{color:var(--ink)}
+.tabstrip button[aria-selected="true"]{color:var(--deep);border-bottom-color:var(--deep)}
+.tabstrip button:focus-visible{outline:2px solid var(--deep);outline-offset:-4px}
+
+/* ---------- panels ---------- */
+main{padding:40px 0 90px}
+[role="tabpanel"][hidden]{display:none}
+h2{
+  font-family:Newsreader,Georgia,serif;
+  font-weight:500;font-size:1.75rem;letter-spacing:-.01em;
+  margin:0 0 6px;
+}
+h3{font-size:1.02rem;font-weight:600;margin:0 0 3px}
+.lede{color:var(--ink-soft);max-width:62ch;margin:0 0 30px}
+p{max-width:68ch}
+
+.entry{padding:22px 0;border-top:1px solid var(--rule)}
+.entry:first-of-type{border-top:none;padding-top:4px}
+.meta{font-size:.85rem;color:var(--ink-soft);margin:0 0 8px}
+.entry p:last-child{margin-bottom:0}
+.note{font-size:.9rem;color:var(--ink-soft)}
+
+/* record table */
+table{width:100%;border-collapse:collapse;margin:0 0 8px;font-size:.93rem}
+th{
+  text-align:left;font-weight:600;font-size:.83rem;
+  color:var(--ink-soft);padding:0 12px 8px 0;
+  border-bottom:1px solid var(--rule);
+}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td:last-child,th:last-child{padding-right:0;white-space:nowrap}
+
+/* software */
+.tool{padding:20px 0;border-top:1px solid var(--rule)}
+.tool:first-of-type{border-top:none;padding-top:4px}
+.tool h3{margin-bottom:2px}
+.tool .kind{font-size:.82rem;color:var(--silt);margin:0 0 7px}
+.tool a{color:var(--deep)}
+
+/* IPR callout */
+.ipr{
+  background:var(--deep-wash);
+  border-left:3px solid var(--deep);
+  padding:18px 20px;margin:0 0 26px;
+}
+.ipr h3{margin-bottom:4px}
+.ipr p{margin:0;font-size:.94rem}
+
+.awards li{margin-bottom:10px}
+ul{padding-left:20px;max-width:66ch}
+
+a{color:var(--deep)}
+footer{border-top:1px solid var(--rule);padding:26px 0 60px;font-size:.85rem;color:var(--ink-soft)}
+
+/* fill-in reminders — delete the class when you replace the text */
+.todo{background:#FFF4CE;padding:0 4px;border-bottom:1px dashed #C9A227}
+
+@media (max-width:640px){
+  header.masthead{padding:36px 0 22px}
+  body{font-size:16px}
+  .mast-inner{flex-direction:column-reverse;gap:22px}
+  .portrait{width:132px;height:160px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <div class="mast-text">
+    <h1>Jutan Das</h1>
+    <p class="standfirst">I build machine-learning tools that find the functional signal in genomes — non-coding RNAs in fish, off-target sites in CRISPR-edited crops.</p>
+    <p class="affil"><strong>Assistant Professor</strong>, Department of Bioinformatics, Kalinga University, Naya Raipur, Chhattisgarh</p>
+    <div class="elsewhere">
+      <a href="https://scholar.google.com/citations?user=M98WWB4AAAAJ">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/jutan-das-a69474163">LinkedIn</a>
+      <a href="https://vidwan.inflibnet.ac.in/profile/715814">Vidwan</a>
+      <a href="https://orcid.org/XXXX-XXXX-XXXX-XXXX" class="todo">ORCID</a>
+      <a href="files/Jutan_Das_CV.pdf">CV (PDF)</a>
+    </div>
+    </div>
+    <img class="portrait" src="images/jutan-das.jpg" alt="Jutan Das">
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabstrip" role="tablist" aria-label="Sections">
+    <button role="tab" id="t-home" aria-controls="p-home" aria-selected="true">Home</button>
+    <button role="tab" id="t-research" aria-controls="p-research" aria-selected="false" tabindex="-1">Research</button>
+    <button role="tab" id="t-academic" aria-controls="p-academic" aria-selected="false" tabindex="-1">Academic</button>
+    <button role="tab" id="t-pubs" aria-controls="p-pubs" aria-selected="false" tabindex="-1">Publications</button>
+    <button role="tab" id="t-software" aria-controls="p-software" aria-selected="false" tabindex="-1">Software</button>
+    <button role="tab" id="t-ipr" aria-controls="p-ipr" aria-selected="false" tabindex="-1">Copyright &amp; IPR</button>
+    <button role="tab" id="t-exp" aria-controls="p-exp" aria-selected="false" tabindex="-1">Experience</button>
+    <button role="tab" id="t-teaching" aria-controls="p-teaching" aria-selected="false" tabindex="-1">Teaching</button>
+    <button role="tab" id="t-contact" aria-controls="p-contact" aria-selected="false" tabindex="-1">Contact</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ HOME ============ -->
+<section role="tabpanel" id="p-home" aria-labelledby="t-home">
+  <h2>About</h2>
+  <p>My work sits between machine learning and genome biology. Most genomes are mostly non-coding, and most of that sequence has no assigned function — my research builds computational methods that assign it one, and that predict what happens when we edit it.</p>
+  <p>Three threads run through the work: discovering long non-coding RNAs in fish species where no annotation exists, predicting CRISPR-Cas9 off-target activity in crop genomes, and building open web resources so that biologists without programming backgrounds can use both. I completed my Ph.D. at ICAR-IARI, New Delhi in 2025 and now teach and supervise at Kalinga University.</p>
+  <p>I grew up in a farming family in Sepahijala district, Tripura, which is still why agricultural genomes are the ones I care most about getting right.</p>
+
+  <div class="entry">
+    <h3>Current focus</h3>
+    <p>Deep learning for CRISPR-Cas9 guide design and off-target prediction in cereal crops; extending fish lncRNA discovery to aquaculture species of economic importance in Northeast India.</p>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section role="tabpanel" id="p-research" aria-labelledby="t-research" hidden>
+  <h2>Research</h2>
+  <p class="lede">Method development, applied to genomes where annotation is thin and the stakes are agricultural.</p>
+
+  <div class="entry">
+    <h3>Non-coding RNA discovery in fish genomes</h3>
+    <p>Long non-coding RNAs regulate development, stress response and immunity, but fish genomes are poorly annotated for them and models trained on mammalian data transfer badly. My doctoral work produced a fish-specific prediction framework and an accompanying genomic web resource, built on sequence and structural features rather than borrowed mammalian priors.</p>
+  </div>
+
+  <div class="entry">
+    <h3>CRISPR-Cas9 off-target prediction in crops</h3>
+    <p>Off-target cleavage is the main barrier to regulatory acceptance of edited crops. Beginning with my M.Sc. work on cleavage-site estimation across 15 crop species, this thread has moved from classical machine learning toward deep architectures that learn guide–target mismatch tolerance directly from sequence.</p>
+  </div>
+
+  <div class="entry">
+    <h3>Genomic web resources</h3>
+    <p>Prediction methods only matter if wet-lab groups can run them. Every project in my lab ships as a public web server or database alongside the paper.</p>
+  </div>
+
+  <div class="entry">
+    <h3>Funded and submitted projects</h3>
+    <p class="meta">Under review</p>
+    <p>ANRF ARG MATRICS — deep learning for CRISPR-Cas9 off-target prediction in cereal crop genomes.</p>
+  </div>
+</section>
+
+<!-- ============ ACADEMIC ============ -->
+<section role="tabpanel" id="p-academic" aria-labelledby="t-academic" hidden>
+  <h2>Academic record</h2>
+  <p class="lede">Degrees, institutions and results.</p>
+
+  <table>
+    <thead><tr><th>Degree</th><th>Institution</th><th>Year</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Ph.D., Bioinformatics</strong><br><span class="note">Minors: Computer Application; Molecular Biology &amp; Biotechnology</span></td>
+        <td>ICAR–Indian Agricultural Research Institute, New Delhi</td>
+        <td>2025</td>
+        <td>OGPA 8.01/10<br><span class="note">First class with distinction</span></td>
+      </tr>
+      <tr>
+        <td><strong>M.Sc. (Agriculture), Bioinformatics</strong><br><span class="note">Minor: Agricultural Statistics</span></td>
+        <td>ICAR–Indian Agricultural Research Institute, New Delhi</td>
+        <td>2019</td>
+        <td>OGPA 7.95/10</td>
+      </tr>
+      <tr>
+        <td><strong>B.Sc. (Ag.) Hons.</strong></td>
+        <td>College of Agriculture, Tripura — Tripura University (Central)</td>
+        <td>2017</td>
+        <td>OGPA 7.85/10</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="entry" style="margin-top:30px">
+    <h3>Doctoral thesis</h3>
+    <p class="meta">ICAR-IARI, 2025 · Supervisor: Dr. Sarika Jaiswal, ICAR-IASRI</p>
+    <p>Development of Artificial Intelligence Based Fish Specific Long Non-Coding RNA Biomarkers Discovery Tool and Web Genomic Resource.</p>
+  </div>
+
+  <div class="entry">
+    <h3>Master's thesis</h3>
+    <p class="meta">ICAR-IARI, 2019</p>
+    <p>Computational Intelligence in the Estimation of CRISPR-Cas9 Cleavage Sites. Random Forest classifier reaching 95.61% accuracy (AUC 0.99) on 379 data points drawn from 51 sgRNAs across 15 crop species.</p>
+  </div>
+
+  <div class="entry">
+    <h3>Entrance standing</h3>
+    <ul>
+      <li>ICAR Ph.D. entrance — All India Rank 4</li>
+      <li>ICAR–IARI M.Sc. entrance — University Placement Score Rank 1</li>
+    </ul>
+  </div>
+
+  <div class="entry awards">
+    <h3>Awards</h3>
+    <ul>
+      <li>Best Research Paper, IAAHAS 2023, SGT University</li>
+      <li>Best Poster Presentation, CITAAS-2024, Guru Kashi University</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section role="tabpanel" id="p-pubs" aria-labelledby="t-pubs" hidden>
+  <h2>Publications</h2>
+  <p class="lede">Peer-reviewed journal articles, book chapters and conference presentations. A complete and current list is on <a href="https://scholar.google.com/citations?user=M98WWB4AAAAJ">Google Scholar</a>.</p>
+
+  <h3 style="margin-bottom:14px">Journal articles</h3>
+
+  <div class="entry">
+    <p class="meta">Database (Oxford), 2025</p>
+    <p><span class="todo">Das, J., et al. Full title of the Database paper.</span> <a href="#" class="todo">DOI</a></p>
+  </div>
+
+  <div class="entry">
+    <p class="meta">Frontiers in Genetics, 2025</p>
+    <p><span class="todo">Das, J., et al. Full title of the first Frontiers paper.</span> <a href="#" class="todo">DOI</a></p>
+  </div>
+
+  <div class="entry">
+    <p class="meta">Frontiers in Genetics, 2025</p>
+    <p><span class="todo">Das, J., et al. Full title of the second Frontiers paper.</span> <a href="#" class="todo">DOI</a></p>
+  </div>
+
+  <div class="entry">
+    <p class="meta">Current Bioinformatics (Bentham Science) — accepted</p>
+    <p><span class="todo">Das, J., et al. Title of the accepted deep learning CRISPR/Cas9 paper.</span></p>
+  </div>
+
+  <h3 style="margin:38px 0 14px">Book chapters</h3>
+  <div class="entry">
+    <p class="meta">In preparation</p>
+    <p>Computational Tools and AI/ML for CRISPR Guide-RNA Design and Off-Target Prediction in Crops. In <em>Recent Trends in Plant Biotechnology</em>, EdTech Publications.</p>
+  </div>
+  <div class="entry">
+    <p class="meta">In preparation</p>
+    <p>AI-driven translational bioinformatics for pathogen tracking. Bentham Science edited volume.</p>
+  </div>
+
+  <h3 style="margin:38px 0 14px">Conference presentations</h3>
+  <div class="entry">
+    <p class="meta">2022</p>
+    <p>73rd Annual Conference, Indian Society of Agricultural Statistics, SKUAST-Kashmir.</p>
+  </div>
+  <div class="entry">
+    <p class="meta">2023</p>
+    <p>Recent Trends in Sustainable Development (RTSD-2023).</p>
+  </div>
+</section>
+
+<!-- ============ SOFTWARE ============ -->
+<section role="tabpanel" id="p-software" aria-labelledby="t-software" hidden>
+  <h2>Software &amp; databases</h2>
+  <p class="lede">Every method I publish ships as something a biologist can actually open in a browser.</p>
+
+  <div class="tool">
+    <h3>FishLncPred</h3>
+    <p class="kind">Prediction tool · LightGBM</p>
+    <p>Fish-specific long non-coding RNA identification, trained on sequence and structural features rather than transferred mammalian models.</p>
+    <p><a href="#" class="todo">Add web server link</a></p>
+  </div>
+
+  <div class="tool">
+    <h3>CCncRNAdb</h3>
+    <p class="kind">Database · Copyright Reg. No. 26561/2024-CO/SW</p>
+    <p>A curated catalogue of non-coding RNAs in common carp (<em>Cyprinus carpio</em>), with search, browse and sequence retrieval.</p>
+    <p><a href="#" class="todo">Add database link</a></p>
+  </div>
+
+  <div class="tool">
+    <h3>i-CRISPR</h3>
+    <p class="kind">Web server</p>
+    <p>CRISPR-Cas9 off-target prediction for guide RNA design in crop genomes.</p>
+    <p><a href="#" class="todo">Add web server link</a></p>
+  </div>
+
+  <div class="tool">
+    <h3>LncSubLoc</h3>
+    <p class="kind">Prediction tool</p>
+    <p>Subcellular localisation prediction for long non-coding RNAs.</p>
+    <p><a href="#" class="todo">Add link</a></p>
+  </div>
+
+  <div class="tool">
+    <h3>CyExpDB</h3>
+    <p class="kind">Database</p>
+    <p><span class="todo">One-line description of CyExpDB.</span></p>
+    <p><a href="#" class="todo">Add link</a></p>
+  </div>
+</section>
+
+<!-- ============ IPR ============ -->
+<section role="tabpanel" id="p-ipr" aria-labelledby="t-ipr" hidden>
+  <h2>Copyright &amp; intellectual property</h2>
+  <p class="lede">Registered software copyrights arising from database and tool development.</p>
+
+  <div class="ipr">
+    <h3>CCncRNAdb — Common Carp Non-Coding RNA Database</h3>
+    <p>Software copyright, Registration No. 26561/2024-CO/SW · Copyright Office, Government of India · 2024</p>
+  </div>
+
+  <p class="note">Further registrations and any patent filings are listed here as they are granted.</p>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section role="tabpanel" id="p-exp" aria-labelledby="t-exp" hidden>
+  <h2>Experience</h2>
+
+  <div class="entry">
+    <p class="meta">February 2026 — present</p>
+    <h3>Assistant Professor, Department of Bioinformatics</h3>
+    <p>Kalinga University, Naya Raipur, Chhattisgarh. Faculty of Science. Teaching at undergraduate and postgraduate level, supervising M.Sc. research, and running an independent computational group.</p>
+  </div>
+
+  <div class="entry">
+    <p class="meta">2019 — 2025</p>
+    <h3>Doctoral researcher, Division of Agricultural Bioinformatics</h3>
+    <p>ICAR-IARI / ICAR-IASRI, New Delhi. Developed fish lncRNA prediction methods and the supporting genomic web resource.</p>
+  </div>
+
+  <div class="entry">
+    <h3>Institutional roles at Kalinga University</h3>
+    <ul>
+      <li>Member, Board of Studies — Department of Bioinformatics</li>
+      <li>Training and Placement Coordinator</li>
+      <li>Magazine Editor</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <h3>Professional memberships</h3>
+    <ul>
+      <li>International Society for Computational Biology (ISCB)</li>
+      <li>BIOCLUES — Bioinformatics.org India (life member)</li>
+      <li>Indian Society of Agricultural Statistics (ISAS)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TEACHING ============ -->
+<section role="tabpanel" id="p-teaching" aria-labelledby="t-teaching" hidden>
+  <h2>Teaching &amp; supervision</h2>
+  <p class="lede">Courses at Kalinga University and students I currently work with.</p>
+
+  <div class="entry">
+    <h3>Courses</h3>
+    <p><span class="todo">List the courses you teach — course code, title, level, semester. For example: BSCBT102B — Bioinformatics Practical Laboratory, B.Sc. Biotechnology.</span></p>
+  </div>
+
+  <div class="entry">
+    <h3>Student supervision</h3>
+    <p>I supervise M.Sc. dissertation and review work in CRISPR-Cas9 off-target prediction and computational approaches to drug discovery. Students interested in machine learning applied to genome data are welcome to write.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section role="tabpanel" id="p-contact" aria-labelledby="t-contact" hidden>
+  <h2>Contact</h2>
+
+  <div class="entry">
+    <h3>Email</h3>
+    <p><span class="todo">your.name@kalingauniversity.ac.in</span></p>
+  </div>
+
+  <div class="entry">
+    <h3>Post</h3>
+    <p>Department of Bioinformatics, Faculty of Science<br>
+    Kalinga University, Kotni, near Mantralaya<br>
+    Naya Raipur, Chhattisgarh 492101, India</p>
+  </div>
+
+  <div class="entry">
+    <h3>Elsewhere</h3>
+    <p>
+      <a href="https://scholar.google.com/citations?user=M98WWB4AAAAJ">Google Scholar</a> ·
+      <a href="https://www.linkedin.com/in/jutan-das-a69474163">LinkedIn</a> ·
+      <a href="https://vidwan.inflibnet.ac.in/profile/715814">Vidwan (ID 715814)</a> ·
+      <a href="files/Jutan_Das_CV.pdf">Curriculum vitae</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Jutan Das · Department of Bioinformatics, Kalinga University · Last updated September 2026</div>
+</footer>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+
+  function show(tab, focus){
+    tabs.forEach(function(t){
+      var selected = t === tab;
+      t.setAttribute('aria-selected', selected);
+      t.tabIndex = selected ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+    });
+    if(focus) tab.focus();
+    history.replaceState(null, '', '#' + tab.id.replace('t-',''));
+    window.scrollTo({top:0});
+  }
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){ show(tab); });
+    tab.addEventListener('keydown', function(e){
+      var i = tabs.indexOf(tab), next = null;
+      if(e.key === 'ArrowRight') next = tabs[(i+1) % tabs.length];
+      if(e.key === 'ArrowLeft')  next = tabs[(i-1+tabs.length) % tabs.length];
+      if(e.key === 'Home')       next = tabs[0];
+      if(e.key === 'End')        next = tabs[tabs.length-1];
+      if(next){ e.preventDefault(); show(next, true); }
+    });
+  });
+
+  // open the tab named in the URL, so links like site.com/#pubs work
+  var hash = window.location.hash.replace('#','');
+  var target = hash && document.getElementById('t-' + hash);
+  if(target) show(target);
+})();
+</script>
+</body>
+</html>
